@@ -9,60 +9,139 @@
 
     <RadioGroup
         android:id="@+id/radioGroup"
-        android:layout_width="169dp"
-        android:layout_height="167dp"
+        android:layout_width="365dp"
+        android:layout_height="238dp"
+        android:layout_marginStart="17dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.545"
+        app:layout_constraintHorizontal_bias="0.173"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.474">
 
-        <RadioButton
-            android:id="@+id/radioOption1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:hint="Opcion 1"
-            android:textColor="#FFFFFF"
-            android:textColorHint="#FFFFFF"
-            android:textSize="18sp" />
-
-        <RadioButton
-            android:id="@+id/radioOption2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:hint="Opcion 2"
-            android:textColor="#FFFFFF"
-            android:textColorHint="#FFFFFF"
-            android:textSize="18sp" />
-
-        <RadioButton
-            android:id="@+id/radioOption3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:hint="Opcion 3"
-            android:textColor="#FFFFFF"
-            android:textColorHint="#FFFFFF"
-            android:textSize="18sp" />
-
-        <RadioButton
-            android:id="@+id/radioOption4"
+        <!-- RadioButton 1 -->
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Opcion 4"
-            android:textColor="#FFFFFF"
-            android:textColorHint="#FFFFFF"
-            android:textSize="18sp" />
+            android:orientation="horizontal">
 
-        <RadioButton
-            android:id="@+id/radioOption5"
+            <RadioButton
+                android:id="@+id/radioOption1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="Opcion 1"
+                android:text="Opcion 1"
+                android:textColor="#FFFFFF"
+                android:textColorHint="#FFFFFF"
+                android:textSize="18sp" />
+
+            <Button
+                android:id="@+id/btnEdit1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Editar" />
+        </LinearLayout>
+
+        <!-- RadioButton 2 -->
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Opcion 5"
-            android:textColor="#FFFFFF"
-            android:textColorHint="#FFFFFF"
-            android:textSize="18sp" />
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/radioOption2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="Opcion 2"
+                android:text="Opcion 2"
+                android:textColor="#FFFFFF"
+                android:textColorHint="#FFFFFF"
+                android:textSize="18sp" />
+
+            <Button
+                android:id="@+id/btnEdit2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Editar" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/radioOption3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="Opcion 3"
+                android:text="Opcion 3"
+                android:textColor="#FFFFFF"
+                android:textColorHint="#FFFFFF"
+                android:textSize="18sp" />
+
+            <Button
+                android:id="@+id/btnEdit3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Editar" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/radioOption4"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="Opcion 4"
+                android:text="Opcion 4"
+                android:textColor="#FFFFFF"
+                android:textColorHint="#FFFFFF"
+                android:textSize="18sp" />
+
+            <Button
+                android:id="@+id/btnEdit4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Editar" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/radioOption5"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="Opcion 5"
+                android:text="Opcion 5"
+                android:textColor="#FFFFFF"
+                android:textColorHint="#FFFFFF"
+                android:textSize="18sp" />
+
+            <Button
+                android:id="@+id/btnEdit5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Editar" />
+        </LinearLayout>
+
+        <!-- ... (repeat for other RadioButtons) -->
+
     </RadioGroup>
+
+
 
     <Button
         android:id="@+id/btnPublish"
@@ -111,8 +190,9 @@
         app:layout_constraintVertical_bias="0.254" />
 
     <LinearLayout
-        android:layout_width="333dp"
-        android:layout_height="73dp"
+        android:id="@+id/linearLayout2"
+        android:layout_width="380dp"
+        android:layout_height="66dp"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="1dp"
         android:orientation="horizontal"
@@ -138,7 +218,6 @@
             android:background="@drawable/edittext_background"
             android:text="QUITAR" />
     </LinearLayout>
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
