@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "507791353623",
+    "project_id": "nacionalfinal-be384",
+    "storage_bucket": "nacionalfinal-be384.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:507791353623:android:b36632613ddd00326e7952",
+        "android_client_info": {
+          "package_name": "cl.santos.nacional"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC4twyW9-0ly3vUSljWxeJ9TdnrHI8bUKs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:507791353623:android:399214a04b2ad1786e7952",
+        "android_client_info": {
+          "package_name": "twin.developers.projectmqtt"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC4twyW9-0ly3vUSljWxeJ9TdnrHI8bUKs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
