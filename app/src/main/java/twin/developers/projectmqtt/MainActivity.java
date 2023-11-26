@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -28,17 +27,18 @@ public class MainActivity extends AppCompatActivity {
     private int opcionVisible = 1; // Índice de la opción actualmente visible
     private int opcionSeleccionada = 1;
 
+    // Elimina la variable radioGroup
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         pregunta = findViewById(R.id.pregunta);
-        texto = findViewById(R.id.textView5);
-        radioGroup = findViewById(R.id.radioGroup);
         btnEnviar = findViewById(R.id.btnPublish);
         agregar = findViewById(R.id.agregar);
         quitar = findViewById(R.id.quitar);
-
+        final TextView textoSeleccionado = findViewById(R.id.textoSeleccionado);
         mqttManager = new Mqtt(getApplicationContext());
         mqttManager.connectToMqttBroker();
 
@@ -58,19 +58,19 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (cantidadOpciones < 5) {
                     cantidadOpciones++;
-                    opcionVisible = cantidadOpciones;
                     mostrarOpciones();
                 }
             }
         });
 
-
-        // Definir el OnClickListener para el botón quitar
         quitar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (cantidadOpciones > 1) {
                     cantidadOpciones--;
+                    if (opcionSeleccionada > cantidadOpciones) {
+                        opcionSeleccionada = cantidadOpciones;
+                    }
                     mostrarOpciones();
                 }
             }
@@ -79,50 +79,16 @@ public class MainActivity extends AppCompatActivity {
         btnEnviar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                texto.setText("");
-
-                RadioButton radioButton = findViewById(radioGroup.getCheckedRadioButtonId());
-
-                if (radioButton != null) {
-                    // Deshabilitar todos los RadioButtons excepto el seleccionado
-                    for (int i = 1; i <= cantidadOpciones; i++) {
-                        int radioButtonId = getResources().getIdentifier("radioOption" + i, "id", getPackageName());
-                        int btnEditId = getResources().getIdentifier("btnEdit" + i, "id", getPackageName());
-
-                        RadioButton currentRadioButton = findViewById(radioButtonId);
-                        Button currentBtnEdit = findViewById(btnEditId);
-
-                        currentRadioButton.setEnabled(false);
-                        currentBtnEdit.setEnabled(false);
-                    }
-
-                    // Habilitar el RadioButton y su botón de edición seleccionados
-                    radioButton.setEnabled(true);
-
-                    int btnEditId = getResources().getIdentifier("btnEdit" + opcionSeleccionada, "id", getPackageName());
-                    Button btnEdit = findViewById(btnEditId);
-                    btnEdit.setEnabled(true);
-
-                    opcionSeleccionada = Integer.parseInt(radioButton.getTag().toString());
-                    opcionVisible = opcionSeleccionada;
-
-                    // Se eliminó la línea que no se estaba utilizando
-                    // String textoRadioSeleccionado = radioButton.getText().toString();
-
-                    mqttManager.publishMessage("encuesta/01", obtenerRespuestaSeleccionada());
+                String textoSeleccionadoString = textoSeleccionado.getText().toString();
+                if (!textoSeleccionadoString.isEmpty()) {
+                    // Publicar el mensaje en el tópico MQTT
+                    mqttManager.publishMessage("encuesta/01", textoSeleccionadoString);
                 } else {
                     Toast.makeText(MainActivity.this, "Selecciona una opción", Toast.LENGTH_SHORT).show();
                 }
             }
         });
 
-
-
-
-
-
-
-        // Asociar el OnClickListener para los botones "Editar"
         for (int i = 1; i <= 5; i++) {
             final int index = i;
             Button btnEdit = findViewById(getResources().getIdentifier("btnEdit" + i, "id", getPackageName()));
@@ -132,29 +98,54 @@ public class MainActivity extends AppCompatActivity {
                     mostrarDialogoEditar(index);
                 }
             });
-            mostrarOpciones();
+
+            // Asociar OnClickListener para los botones de opción
+            Button opcionButton = findViewById(getResources().getIdentifier("opcion" + i, "id", getPackageName()));
+            opcionButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onOpcionButtonClick(index);
+                }
+            });
         }
     }
 
-    private String obtenerRespuestaSeleccionada() {
-        int radioButtonId = radioGroup.getCheckedRadioButtonId();
-        if (radioButtonId != -1) {
-            RadioButton radioButton = findViewById(radioButtonId);
-            return radioButton.getText().toString();
-        }
-        return null;
-    }
+// Elimina el método onCheckedChanged
 
-    private void mostrarOpcion() {
+    private void mostrarOpciones() {
         for (int i = 1; i <= 5; i++) {
-            int radioButtonId = getResources().getIdentifier("radioOption" + i, "id", getPackageName());
-            RadioButton radioButton = findViewById(radioButtonId);
+            int opcionButtonId = getResources().getIdentifier("opcion" + i, "id", getPackageName());
+            Button opcionButton = findViewById(opcionButtonId);
             Button btnEdit = findViewById(getResources().getIdentifier("btnEdit" + i, "id", getPackageName()));
-            if (i == opcionVisible) {
-                radioButton.setVisibility(View.VISIBLE);
+            if (i <= cantidadOpciones) {
+                opcionButton.setVisibility(View.VISIBLE);
                 btnEdit.setVisibility(View.VISIBLE);
             } else {
-                radioButton.setVisibility(View.GONE);
+                opcionButton.setVisibility(View.GONE);
+                btnEdit.setVisibility(View.GONE);
+            }
+        }
+    }
+
+
+    private void onOpcionButtonClick(int index) {
+        // Cambiar el color del botón de opción (puedes personalizar esto según tus necesidades)
+        Button opcionButton = findViewById(getResources().getIdentifier("opcion" + index, "id", getPackageName()));
+
+        // Actualizar el textoSeleccionado
+        TextView textoSeleccionado = findViewById(R.id.textoSeleccionado);
+        textoSeleccionado.setText(opcionButton.getText().toString());
+    }
+    private void mostrarOpcion() {
+        for (int i = 1; i <= 5; i++) {
+            int opcionButtonId = getResources().getIdentifier("opcion" + i, "id", getPackageName());
+            Button opcionButton = findViewById(opcionButtonId);
+            Button btnEdit = findViewById(getResources().getIdentifier("btnEdit" + i, "id", getPackageName()));
+            if (i == opcionVisible) {
+                opcionButton.setVisibility(View.VISIBLE);
+                btnEdit.setVisibility(View.VISIBLE);
+            } else {
+                opcionButton.setVisibility(View.GONE);
                 btnEdit.setVisibility(View.GONE);
             }
         }
@@ -201,11 +192,9 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int which) {
                 String respuesta = input.getText().toString();
                 if (!respuesta.isEmpty()) {
-                    RadioButton radioButton = findViewById(getResources().getIdentifier("radioOption" + index, "id", getPackageName()));
-                    radioButton.setText(respuesta);
-
-                    // Actualizar el texto del radio seleccionado también
-                    pregunta.setText(respuesta);
+                    // Actualizar el texto del botón de opción
+                    Button opcionButton = findViewById(getResources().getIdentifier("opcion" + index, "id", getPackageName()));
+                    opcionButton.setText(respuesta);
                 } else {
                     Toast.makeText(MainActivity.this, "La respuesta no puede estar vacía", Toast.LENGTH_SHORT).show();
                 }
@@ -220,22 +209,6 @@ public class MainActivity extends AppCompatActivity {
         });
 
         builder.show();
-    }
-
-    private void mostrarOpciones() {
-        for (int i = 1; i <= 5; i++) {
-            int radioButtonId = getResources().getIdentifier("radioOption" + i, "id", getPackageName());
-            RadioButton radioButton = findViewById(radioButtonId);
-            Button btnEdit = findViewById(getResources().getIdentifier("btnEdit" + i, "id", getPackageName()));
-            if (i <= cantidadOpciones) {
-                radioButton.setVisibility(View.VISIBLE);
-                btnEdit.setVisibility(View.VISIBLE);
-            } else {
-                radioButton.setVisibility(View.GONE);
-                btnEdit.setVisibility(View.GONE);
-            }
-        }
-
     }
 
 }

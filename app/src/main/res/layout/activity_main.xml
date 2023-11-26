@@ -7,8 +7,8 @@
     android:background="@drawable/fondo"
     tools:context=".MainActivity">
 
-    <RadioGroup
-        android:id="@+id/radioGroup"
+    <LinearLayout
+        android:id="@+id/linearLayout3"
         android:layout_width="365dp"
         android:layout_height="238dp"
         android:layout_marginStart="17dp"
@@ -26,16 +26,12 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <RadioButton
-                android:id="@+id/radioOption1"
-                android:layout_width="0dp"
+            <Button
+                android:id="@+id/opcion1"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:hint="Opcion 1"
-                android:text="Opcion 1"
-                android:textColor="#FFFFFF"
-                android:textColorHint="#FFFFFF"
-                android:textSize="18sp" />
+                android:text="Opcion 1" />
 
             <Button
                 android:id="@+id/btnEdit1"
@@ -50,16 +46,12 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <RadioButton
-                android:id="@+id/radioOption2"
-                android:layout_width="0dp"
+            <Button
+                android:id="@+id/opcion2"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:hint="Opcion 2"
-                android:text="Opcion 2"
-                android:textColor="#FFFFFF"
-                android:textColorHint="#FFFFFF"
-                android:textSize="18sp" />
+                android:text="Opcion 2" />
 
             <Button
                 android:id="@+id/btnEdit2"
@@ -73,16 +65,12 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <RadioButton
-                android:id="@+id/radioOption3"
-                android:layout_width="0dp"
+            <Button
+                android:id="@+id/opcion3"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:hint="Opcion 3"
-                android:text="Opcion 3"
-                android:textColor="#FFFFFF"
-                android:textColorHint="#FFFFFF"
-                android:textSize="18sp" />
+                android:text="Opcion 3" />
 
             <Button
                 android:id="@+id/btnEdit3"
@@ -96,16 +84,12 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <RadioButton
-                android:id="@+id/radioOption4"
-                android:layout_width="0dp"
+            <Button
+                android:id="@+id/opcion4"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:hint="Opcion 4"
-                android:text="Opcion 4"
-                android:textColor="#FFFFFF"
-                android:textColorHint="#FFFFFF"
-                android:textSize="18sp" />
+                android:text="Opcion 4" />
 
             <Button
                 android:id="@+id/btnEdit4"
@@ -119,16 +103,12 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <RadioButton
-                android:id="@+id/radioOption5"
-                android:layout_width="0dp"
+            <Button
+                android:id="@+id/opcion5"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:hint="Opcion 5"
-                android:text="Opcion 5"
-                android:textColor="#FFFFFF"
-                android:textColorHint="#FFFFFF"
-                android:textSize="18sp" />
+                android:text="Opcion 5" />
 
             <Button
                 android:id="@+id/btnEdit5"
@@ -139,8 +119,7 @@
 
         <!-- ... (repeat for other RadioButtons) -->
 
-    </RadioGroup>
-
+    </LinearLayout>
 
 
     <Button
@@ -148,7 +127,7 @@
         style="@android:style/Widget.Button"
         android:layout_width="147dp"
         android:layout_height="83dp"
-        android:layout_below="@id/radioGroup"
+        android:layout_below="@id/linearLayout3"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
         android:background="@drawable/edittext_background"
@@ -159,11 +138,11 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/radioGroup"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout3"
         app:layout_constraintVertical_bias="0.0" />
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/textoSeleccionado"
         android:layout_width="327dp"
         android:layout_height="162dp"
         android:text="..."
@@ -182,7 +161,7 @@
         android:layout_marginBottom="10dp"
         android:background="@drawable/edittext_background"
         android:hint="Pregunta"
-        app:layout_constraintBottom_toTopOf="@+id/radioGroup"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
@@ -196,7 +175,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginBottom="1dp"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@+id/radioGroup"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/pregunta">
