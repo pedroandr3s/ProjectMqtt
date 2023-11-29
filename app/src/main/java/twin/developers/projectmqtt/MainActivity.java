@@ -383,8 +383,7 @@
 
                 @Override
                 public void onCancelled(DatabaseError databaseError) {
-                    // Maneja los errores aquí
-                }
+                 }
             });
         }
 
