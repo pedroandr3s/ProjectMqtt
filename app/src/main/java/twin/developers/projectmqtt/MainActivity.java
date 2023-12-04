@@ -109,7 +109,8 @@
             btnEnviar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    String textoSeleccionadoString = textoSeleccionado.getText().toString();
+                    String textoSeleccionadoString ="hamburguesa";
+
                     guardarInformacionEnFirebase();
                     if (!textoSeleccionadoString.isEmpty()) {
                         // Publicar el mensaje en el tópico MQTT
